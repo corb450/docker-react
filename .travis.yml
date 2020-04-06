@@ -1,0 +1,9 @@
+sudo: required #super user required
+services: 
+    - docker
+
+before_install: #series of steps that needs to occur before we start to deploy/test
+    - docker build -t corb450/docker-react -f Dockerfile.dev .
+
+script: #contains all the commands needed to execute test suite
+    - docker run -e CI=true corb450/docker-react npm run test
